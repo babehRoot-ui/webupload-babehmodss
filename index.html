@@ -20,32 +20,51 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            color: #e5e7eb;
         }
 
-        /* Background efek cursed energy */
-        .cursed-bg {
+        /* BACKGROUND VIDEO */
+        .video-bg {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(45, 15, 75, 0.4) 0%, rgba(0, 0, 0, 0.95) 100%);
+            object-fit: cover;
             z-index: -2;
+            opacity: 0.85;
         }
 
-        /* Particle effect */
-        .particles {
+        /* FALLBACK gradient */
+        .fallback-bg {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(45, 15, 75, 0.6) 0%, rgba(0, 0, 0, 0.95) 100%);
+            z-index: -3;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
             z-index: -1;
         }
 
+        /* Cursed particles */
         .particle {
-            position: absolute;
-            background: rgba(157, 78, 221, 0.6);
+            position: fixed;
+            background: rgba(157, 78, 221, 0.5);
             border-radius: 50%;
             pointer-events: none;
             animation: floatParticle linear infinite;
             box-shadow: 0 0 10px rgba(157, 78, 221, 0.8);
+            z-index: -1;
         }
 
         @keyframes floatParticle {
@@ -63,31 +82,6 @@
                 transform: translateY(-20vh) rotate(360deg);
                 opacity: 0;
             }
-        }
-
-        /* Geto character silhouette */
-        .geto-silhouette {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 400px;
-            height: 500px;
-            background: url('https://i.pinimg.com/originals/9e/5f/8b/9e5f8b8e9e5f8b8e9e5f8b8e9e5f8b8e.png') no-repeat bottom right;
-            background-size: contain;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Dragon ornament */
-        .dragon-ornament {
-            position: fixed;
-            top: 10%;
-            left: -50px;
-            width: 300px;
-            opacity: 0.08;
-            pointer-events: none;
-            transform: rotate(-15deg);
         }
 
         /* Navbar */
@@ -147,36 +141,20 @@
             text-decoration: none;
             font-weight: 500;
             transition: 0.3s;
-            position: relative;
         }
 
         .nav-links a:hover {
             color: #c77dff;
         }
 
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #9d4edd, #c77dff);
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-
-        /* Main Container */
+        /* Container */
         .container {
             max-width: 1000px;
             margin: 50px auto;
             padding: 0 20px;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             text-align: center;
             margin-bottom: 50px;
@@ -289,7 +267,7 @@
             margin-top: 10px;
         }
 
-        /* Progress Bar */
+        /* Progress */
         .progress-area {
             margin-top: 25px;
             display: none;
@@ -335,7 +313,7 @@
             color: #9d4edd;
         }
 
-        /* Result Area */
+        /* Result */
         .result-area {
             margin-top: 25px;
             display: none;
@@ -483,12 +461,6 @@
             font-size: 12px;
         }
 
-        .footer .cursed-sign {
-            color: #9d4edd;
-            font-family: monospace;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
@@ -521,34 +493,21 @@
             .result-link {
                 flex-direction: column;
             }
-            .geto-silhouette {
-                width: 250px;
-                opacity: 0.08;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animasi glitch untuk text */
-        @keyframes glitch {
-            0%, 100% { text-shadow: 2px 0 #9d4edd, -2px 0 #7b2cbf; }
-            33% { text-shadow: 3px 0 #9d4edd, -3px 0 #7b2cbf; }
-            66% { text-shadow: -2px 0 #9d4edd, 2px 0 #7b2cbf; }
-        }
-
-        .glitch-text {
-            animation: glitch 3s infinite;
         }
     </style>
 </head>
 <body>
-    <div class="cursed-bg"></div>
-    <div class="particles" id="particles"></div>
-    <div class="geto-silhouette"></div>
+
+    <!-- FALLBACK GRADIENT -->
+    <div class="fallback-bg"></div>
+
+    <!-- BACKGROUND VIDEO -->
+    <!-- GANTI LINK VIDEO DI BAWAH INI PAKE LINK YANG LO MAU! -->
+    <video class="video-bg" autoplay loop muted playsinline>
+        <source src="https://rahmad-elaina.my.id/file/61ef5aec1a.mp4" type="video/mp4">
+        <!-- Ganti link video di atas pake direct link .mp4 -->
+    </video>
+    <div class="overlay"></div>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -563,13 +522,12 @@
             <a href="#">Domain</a>
             <a href="#">API</a>
             <a href="#">Docs</a>
-            <a href="#"><i class="fas fa-moon"></i></a>
         </div>
     </nav>
 
     <div class="container">
         <div class="hero">
-            <h1 class="glitch-text">GETO.UPLOADER</h1>
+            <h1>GETO.UPLOADER</h1>
             <div class="tagline">✦ CURSED ENERGY POWERED ✦</div>
             <div class="cursed-text">"With this treasure, I summon — Unlimited File Storage"</div>
         </div>
@@ -646,6 +604,19 @@
     </footer>
 
     <script>
+        // Particles
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 4 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = Math.random() * 8 + 5 + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(particle);
+        }
+
         // DOM Elements
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
@@ -662,27 +633,8 @@
 
         let selectedFile = null;
 
-        // Particle background
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = Math.random() * 4 + 1;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = Math.random() * 8 + 5 + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        createParticles();
-
-        // Drop zone click
         dropZone.onclick = () => fileInput.click();
 
-        // Drag and drop
         dropZone.ondragover = (e) => {
             e.preventDefault();
             dropZone.classList.add('drag-over');
@@ -730,9 +682,9 @@
                 video.controls = true;
                 previewContent.appendChild(video);
             } else {
-                previewContent.innerHTML = `<div style="padding: 40px; text-align: center;">
-                    <i class="fas fa-file-alt" style="font-size: 48px; color: #9d4edd;"></i>
-                    <p style="margin-top: 15px; color: #c4c4e4;">${fileName}</p>
+                previewContent.innerHTML = `<div style="padding: 40px;">
+                    <i class="fas fa-file" style="font-size: 48px; color: #9d4edd;"></i>
+                    <p>${fileName}</p>
                 </div>`;
             }
         }
@@ -740,11 +692,6 @@
         uploadBtn.onclick = () => {
             if (!selectedFile) {
                 alert('Pilih file dulu, bocah!');
-                return;
-            }
-            
-            if (selectedFile.size > 100 * 1024 * 1024) {
-                alert('File kegedean! Max 100MB.');
                 return;
             }
             
@@ -756,6 +703,8 @@
             
             progressArea.style.display = 'block';
             resultArea.style.display = 'none';
+            progressBar.style.width = '0%';
+            progressText.innerText = '0%';
             
             xhr.upload.onprogress = (e) => {
                 if (e.lengthComputable) {
@@ -773,20 +722,12 @@
                     if (link) {
                         resultUrl.value = link;
                         resultArea.style.display = 'block';
-                        
-                        // Reset setelah sukses
                         selectedFile = null;
                         fileInput.value = '';
                         previewArea.style.display = 'none';
                         previewContent.innerHTML = '';
-                        
-                        // Efek sukses
-                        uploadBtn.style.transform = 'scale(0.98)';
-                        setTimeout(() => {
-                            uploadBtn.style.transform = '';
-                        }, 200);
                     } else {
-                        alert('Gagal upload: ' + JSON.stringify(response));
+                        alert('Upload gagal: ' + JSON.stringify(response));
                     }
                 } catch (e) {
                     alert('Error: ' + e.message);
